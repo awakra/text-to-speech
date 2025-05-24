@@ -1,5 +1,3 @@
-# core/pdf_extractor.py
-
 import PyPDF2
 
 def extract_text_from_pdf(pdf_file_path: str) -> str | None:

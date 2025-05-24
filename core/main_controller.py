@@ -1,8 +1,6 @@
-# core/main_controller.py
-
 import asyncio
-from pdf_extractor import extract_text_from_pdf
-from speech_synthesizer import synthesize_speech, DEFAULT_VOICE, DEFAULT_OUTPUT_FILE
+from .pdf_extractor import extract_text_from_pdf  # Adicione o '.' aqui
+from .speech_synthesizer import synthesize_speech, DEFAULT_VOICE, DEFAULT_OUTPUT_FILE
 
 async def convert_pdf_to_speech(
     pdf_file_path: str,

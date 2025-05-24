@@ -1,5 +1,3 @@
-# core/speech_synthesizer.py
-
 import asyncio
 import edge_tts
 from edge_tts import VoicesManager
@@ -14,27 +12,15 @@ DEFAULT_OUTPUT_FILE = "output.mp3"
 async def list_available_voices(language: str = None, gender: str = None, locale_str: str = None) -> list:
     """
     Retrieves a list of available voices from Edge TTS, optionally filtered by language, gender, or locale.
-
-    Args:
-        language (str, optional): Filter by language (e.g., "en" for English). Defaults to None.
-        gender (str, optional): Filter by gender (e.g., "Male" or "Female"). Defaults to None.
-        locale_str (str, optional): Filter by locale (e.g., "en-US"). Defaults to None.
-
-    Returns:
-        list: A list of voice details (dictionaries) matching the criteria.
-              Each dictionary contains keys like 'Name', 'ShortName', 'Gender', 'Locale'.
     """
     try:
-        voices_manager = await VoicesManager.create()
-        voices = voices_manager.find_all()
-
+        voices = await edge_tts.list_voices()  # <-- CORRETO!
         if language:
             voices = [v for v in voices if language.lower() in v['Locale'].lower().split('-')[0]]
         if gender:
             voices = [v for v in voices if gender.lower() == v['Gender'].lower()]
         if locale_str:
             voices = [v for v in voices if locale_str.lower() in v['Locale'].lower()]
-        
         return voices
     except Exception as e:
         print(f"Error listing voices: {e}")
